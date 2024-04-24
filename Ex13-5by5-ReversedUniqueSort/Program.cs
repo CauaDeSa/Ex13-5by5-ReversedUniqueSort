@@ -4,13 +4,14 @@ int[] numbers = new int[size];
 int[] ordered = new int[size];
 int[] reversedVector = new int[size];
 
-int lastOccurrence, minor, aux, higher, count;
+int lastOccurrence, minor, last, higher, count;
 
 do
 {
+    Console.Clear();
     lastOccurrence = higher = count = 0;
 
-    Console.WriteLine("\nChallenger vector");
+    Console.WriteLine("Challenger vector");
 
     for (int i = 0; i < size; i++)
     {
@@ -28,7 +29,7 @@ do
         }
     }
 
-    ordered[count++] = minor;
+    ordered[count] = minor;
 
     for (int i = 0; i < size; i++)
     {
@@ -39,12 +40,12 @@ do
     for (int index = 0; index < size; index++)
     {
         minor = higher;
-        aux = count - 1;
+        last = count;
 
         for (int i = 0; i < size; i++)
         {
-            if (numbers[i] < numbers[minor] && numbers[i] >= ordered[aux])
-                if (numbers[i] == ordered[aux])
+            if (numbers[i] < numbers[minor] && numbers[i] >= ordered[last])
+                if (numbers[i] == ordered[last])
                 {
                     if (i > lastOccurrence)
                         minor = i;
@@ -55,20 +56,20 @@ do
 
         lastOccurrence = minor;
 
-        if (ordered[count - 1] != numbers[minor])
-            ordered[count++] = numbers[minor];
+        if (ordered[count] != numbers[minor])
+            ordered[++count] = numbers[minor];
     }
 
-    Console.WriteLine("\n\nVector without same numbers");
-    aux = count;
+    Console.WriteLine("\n\nVector without repeated numbers");
+    last = count;
 
     for (int i = 0; i < count; i++)
         Console.Write(ordered[i] + " ");
 
     for (int i = 0; i < count; i++)
-        reversedVector[i] = ordered[--aux];
+        reversedVector[i] = ordered[--last];
 
-    Console.WriteLine("\n\nReverted");
+    Console.WriteLine("\n\nInverted");
 
     for (int i = 0; i < count; i++)
         Console.Write(reversedVector[i] + " ");
